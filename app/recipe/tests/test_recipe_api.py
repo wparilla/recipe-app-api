@@ -18,7 +18,7 @@ from core.models import (
 from recipe.serializers import (
     RecipeSerializer,
     RecipeDetailSerializer,
-    )
+)
 
 
 RECIPES_URL = reverse('recipe:recipe-list')
@@ -139,7 +139,7 @@ class PrivateRecipeApiTests(TestCase):
         self.assertEqual(recipe.user, self.user)
 
     def test_full_update(self):
-        """Test full update on recipe."""
+        """Test full update of recipe."""
         recipe = create_recipe(
             user=self.user,
             title='Sample recipe title',
@@ -204,7 +204,7 @@ class PrivateRecipeApiTests(TestCase):
             'price': Decimal('2.50'),
             'tags': [{'name': 'Thai'}, {'name': 'Dinner'}]
         }
-        res = self.client.post(RECIPES_URL, payload, fotmat='json')
+        res = self.client.post(RECIPES_URL, payload, format='json')
 
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
         recipes = Recipe.objects.filter(user=self.user)
@@ -227,7 +227,7 @@ class PrivateRecipeApiTests(TestCase):
             'price': Decimal('4.50'),
             'tags': [{'name': 'Indian'}, {'name': 'Breakfast'}],
         }
-        res = self.client.post(RECIPES_URL, payload, fotmat='json')
+        res = self.client.post(RECIPES_URL, payload, format='json')
 
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
         recipes = Recipe.objects.filter(user=self.user)
@@ -243,7 +243,7 @@ class PrivateRecipeApiTests(TestCase):
             self.assertTrue(exists)
 
     def test_create_tag_on_update(self):
-        """Test creating tag when updating a recipe."""
+        """Test create tag when updating a recipe."""
         recipe = create_recipe(user=self.user)
 
         payload = {'tags': [{'name': 'Lunch'}]}
